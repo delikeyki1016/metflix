@@ -22,7 +22,16 @@ body {
 
 .not-found {
     width: 100%;
-    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+    .not-found img {
+        width: 100%;
+    }
 }
 
 nav .nav-link:focus {
@@ -32,4 +41,16 @@ nav .nav-link:focus {
 .form-control:focus {
     border-color: rgba(229, 9, 20, 0.5);
     box-shadow: 0 0 0 0.25rem rgba(229, 9, 20, 0.25);
+}
+
+button:hover {
+    border-color: rgba(229, 9, 20, 0.5);
+    background-color: rgb(229, 9, 20);
+}
+
+button:focus-visible,
+button:focus {
+    outline: 3px auto rgba(229, 9, 20, 0.5);
+    box-shadow: none !important;
+    border: 1px solid rgb(229, 9, 20);
 }

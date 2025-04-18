@@ -17,11 +17,17 @@
 .banner-text-area {
     width: 50%;
     height: 100%;
-    padding: 50px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: #fff !important;
+}
+
+@media (max-width: 800px) {
+    .banner-text-area {
+        width: 100%;
+    }
 }
 
 .banner-text-area > * {
