@@ -5,7 +5,7 @@ import AppLayout from "./layout/AppLayout";
 import MoviePage from "./pages/Movies/MoviePage";
 import MovieDetail from "./pages/MovieDetail/MovieDetail";
 import Homepage from "./pages/Homepage/Homepage";
-import NotFound from "./pages/Notfound/Notfound";
+import NotFound from "./pages/NotFound/NotFound";
 
 // 홈, 영화 전체(서치), 영화 상세
 function App() {
