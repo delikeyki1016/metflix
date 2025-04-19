@@ -4,12 +4,14 @@
 // 4. upcoming move 가져오기
 
 import Banner from "./components/Banner/Banner";
+import PopularMovieSlide from "./components/PopularMovieSlide/PopularMovieSlide";
 
 const Homepage = () => {
     return (
-        <div>
+        <>
             <Banner />
-        </div>
+            <PopularMovieSlide />
+        </>
     );
 };
 export default Homepage;

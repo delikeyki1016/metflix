@@ -9,14 +9,21 @@ import { Outlet, useNavigate } from "react-router-dom";
 const AppLayout = () => {
     const navigate = useNavigate();
     return (
-        <div>
+        <>
             <Navbar
                 expand="lg"
                 className="bg-body-tertiary"
                 bg="dark"
                 data-bs-theme="dark"
+                style={{
+                    position: "fixed",
+                    width: "100%",
+                    zIndex: 9,
+                    height: 70,
+                    top: 0,
+                }}
             >
-                <Container fluid>
+                <Container fluid style={{ maxWidth: 1600 }}>
                     <Navbar.Brand>
                         <img src="/logo.png" width="120" />
                     </Navbar.Brand>
@@ -49,8 +56,10 @@ const AppLayout = () => {
                 </Container>
             </Navbar>
             {/* 라우터 안의 자손들을 가져옴 */}
-            <Outlet />
-        </div>
+            <div className="content-wrap">
+                <Outlet />
+            </div>
+        </>
     );
 };
 export default AppLayout;
