@@ -29,9 +29,9 @@ const MovieCard = ({ movie, type, ranking }) => {
                         <li>
                             grade :{" "}
                             {movie.adult ? (
-                                <Badge bg="success">All</Badge>
-                            ) : (
                                 <Badge bg="danger">Adult</Badge>
+                            ) : (
+                                <Badge bg="success">All</Badge>
                             )}
                         </li>
                     </ul>
