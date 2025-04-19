@@ -4,9 +4,11 @@ import MovieCard from "../MovieCard/MovieCard";
 import "./CommonSlide.style.css";
 import { Alert, Spinner } from "react-bootstrap";
 
-const CommonSlide = ({ data, isLoading, isError, error, title }) => {
+const CommonSlide = ({ data, isLoading, isError, error, type }) => {
     if (isLoading) {
-        return <Spinner animation="border" variant="danger" />;
+        return (
+            <Spinner animation="border" variant="danger" className="spinner" />
+        );
     }
     if (isError) {
         return <Alert variant={"danger"}>{error.message}</Alert>;
@@ -31,7 +33,7 @@ const CommonSlide = ({ data, isLoading, isError, error, title }) => {
     };
     return (
         <section>
-            <h3>{title} Movies</h3>
+            <h3>{type} Movies</h3>
             <Carousel
                 infinite={true}
                 centerMode={true}
@@ -39,7 +41,7 @@ const CommonSlide = ({ data, isLoading, isError, error, title }) => {
                 responsive={responsive}
             >
                 {data.results.map((movie, index) => (
-                    <MovieCard movie={movie} key={index} />
+                    <MovieCard movie={movie} type={type} ranking={index} />
                 ))}
             </Carousel>
         </section>

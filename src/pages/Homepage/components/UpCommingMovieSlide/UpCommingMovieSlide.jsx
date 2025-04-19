@@ -11,7 +11,7 @@ const UpCommingMovieSlide = () => {
             isLoading={isLoading}
             isError={isError}
             error={error}
-            title="Upcomming"
+            type="Upcomming"
         />
     );
 };

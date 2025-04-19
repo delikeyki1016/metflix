@@ -7,7 +7,9 @@ const Banner = () => {
         usePopularMoviesQuery("now_playing");
     // console.log("now playing", data);
     if (isLoading) {
-        return <Spinner animation="border" variant="danger" />;
+        return (
+            <Spinner animation="border" variant="danger" className="spinner" />
+        );
     }
     if (isError) {
         return <Alert variant={"danger"}>{error.message}</Alert>;

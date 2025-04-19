@@ -1,4 +1,5 @@
 .movie-card {
+    position: relative;
     width: 264px;
     height: 330px;
     background-size: cover;
@@ -8,6 +9,7 @@
 }
 
 .overlay {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,6 +21,7 @@
     transition: all 1s;
     color: #fff;
     overflow-wrap: break-word;
+    z-index: 2;
 }
 
 .overlay:hover {
@@ -45,4 +48,28 @@
 ul {
     padding-left: 18px;
     list-style: disc;
+}
+
+.ranking {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    width: 30px;
+    height: 34px;
+    padding: 5px 0;
+    text-align: center;
+    background-color: red;
+}
+
+.ranking:after {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    content: " ";
+    height: 0;
+    border-top: 10px solid;
+    border-left: 15px solid rgba(0, 0, 0, 0);
+    border-right: 15px solid rgba(0, 0, 0, 0);
+    color: red;
 }

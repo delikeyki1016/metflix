@@ -1,7 +1,7 @@
 import Badge from "react-bootstrap/Badge";
 import "./MovieCard.style.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, type, ranking }) => {
     return (
         <div
             style={{
@@ -9,6 +9,9 @@ const MovieCard = ({ movie }) => {
             }}
             className="movie-card"
         >
+            {type === "Top rated" && (
+                <div className="ranking">{ranking + 1}</div>
+            )}
             <div className="overlay">
                 <h4>{movie.title}</h4>
 

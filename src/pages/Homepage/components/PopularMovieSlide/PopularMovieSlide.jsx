@@ -11,7 +11,7 @@ const PopularMovieSlide = () => {
             isLoading={isLoading}
             isError={isError}
             error={error}
-            title="Popular"
+            type="Popular"
         />
     );
 };

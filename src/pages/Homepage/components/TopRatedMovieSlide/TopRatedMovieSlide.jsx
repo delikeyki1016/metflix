@@ -10,7 +10,7 @@ const TopRatedMovieSlide = () => {
             isLoading={isLoading}
             isError={isError}
             error={error}
-            title="Top rated"
+            type="Top rated"
         />
     );
 };

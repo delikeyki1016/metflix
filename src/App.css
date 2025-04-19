@@ -63,3 +63,9 @@ section {
     margin: 0 auto;
     padding: 30px;
 }
+
+.spinner {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+}
