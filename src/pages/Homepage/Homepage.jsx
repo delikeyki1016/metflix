@@ -5,12 +5,16 @@
 
 import Banner from "./components/Banner/Banner";
 import PopularMovieSlide from "./components/PopularMovieSlide/PopularMovieSlide";
+import TopRatedMovieSlide from "./components/TopRatedMovieSlide/TopRatedMovieSlide";
+import UpCommingMovieSlide from "./components/UpCommingMovieSlide/UpCommingMovieSlide";
 
 const Homepage = () => {
     return (
         <>
             <Banner />
             <PopularMovieSlide />
+            <TopRatedMovieSlide />
+            <UpCommingMovieSlide />
         </>
     );
 };

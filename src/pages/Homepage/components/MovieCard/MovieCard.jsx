@@ -14,14 +14,23 @@ const MovieCard = ({ movie }) => {
 
                 <div className="movie-info">
                     <div className="badge-wrap">
-                        {movie.genre_ids.map((id) => (
-                            <Badge bg="danger">{id}</Badge>
+                        {movie.genre_ids.map((id, index) => (
+                            <Badge bg="warning" key={index}>
+                                {id}
+                            </Badge>
                         ))}
                     </div>
                     <ul>
-                        <li>vote average : {movie.vote_average}</li>
+                        <li>average : {movie.vote_average}</li>
                         <li>populariry : {movie.popularity}</li>
-                        <li>grade : {movie.adult ? "18+" : "18-"}</li>
+                        <li>
+                            grade :{" "}
+                            {movie.adult ? (
+                                <Badge bg="success">All</Badge>
+                            ) : (
+                                <Badge bg="danger">Adult</Badge>
+                            )}
+                        </li>
                     </ul>
                 </div>
             </div>

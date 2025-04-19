@@ -3,8 +3,9 @@ import Spinner from "react-bootstrap/Spinner";
 import "./Banner.style.css";
 
 const Banner = () => {
-    const { data, isLoading, isError, error } = usePopularMoviesQuery();
-    console.log("dd", data);
+    const { data, isLoading, isError, error } =
+        usePopularMoviesQuery("now_playing");
+    // console.log("now playing", data);
     if (isLoading) {
         return <Spinner animation="border" variant="danger" />;
     }

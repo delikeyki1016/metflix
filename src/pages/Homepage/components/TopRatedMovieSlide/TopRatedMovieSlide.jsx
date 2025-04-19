@@ -1,18 +1,17 @@
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
 import CommonSlide from "../CommonSlide/CommonSlide";
-
-const PopularMovieSlide = () => {
+const TopRatedMovieSlide = () => {
     const { data, isLoading, isError, error } =
-        usePopularMoviesQuery("popular");
-    console.log("popular:", data);
+        usePopularMoviesQuery("top_rated");
+    console.log("top_rated:", data);
     return (
         <CommonSlide
             data={data}
             isLoading={isLoading}
             isError={isError}
             error={error}
-            title="Popular"
+            title="Top rated"
         />
     );
 };
-export default PopularMovieSlide;
+export default TopRatedMovieSlide;
