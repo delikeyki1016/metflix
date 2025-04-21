@@ -1,5 +1,6 @@
+import CommonSlide from "../../../../common/CommonSlide/CommonSlide";
+import { responsive } from "../../../../constants/responsive";
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
-import CommonSlide from "../CommonSlide/CommonSlide";
 
 const PopularMovieSlide = () => {
     const { data, isLoading, isError, error } =
@@ -12,6 +13,7 @@ const PopularMovieSlide = () => {
             isError={isError}
             error={error}
             type="Popular"
+            responsive={responsive}
         />
     );
 };

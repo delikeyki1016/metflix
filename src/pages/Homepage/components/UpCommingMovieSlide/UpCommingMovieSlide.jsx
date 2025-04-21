@@ -1,5 +1,6 @@
+import CommonSlide from "../../../../common/CommonSlide/CommonSlide";
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
-import CommonSlide from "../CommonSlide/CommonSlide";
+import { responsive } from "../../../../constants/responsive";
 
 const UpCommingMovieSlide = () => {
     const { data, isLoading, isError, error } =
@@ -12,6 +13,7 @@ const UpCommingMovieSlide = () => {
             isError={isError}
             error={error}
             type="Upcomming"
+            responsive={responsive}
         />
     );
 };

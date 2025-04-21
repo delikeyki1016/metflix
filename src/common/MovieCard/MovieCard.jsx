@@ -1,7 +1,20 @@
 import Badge from "react-bootstrap/Badge";
 import "./MovieCard.style.css";
+import { useMovieGenreQuery } from "../../hooks/useMoiveGenre";
 
 const MovieCard = ({ movie, type, ranking }) => {
+    //data: gendreData ==> 받은 데이터를 gendreData로 reName
+    const { data: genreData } = useMovieGenreQuery();
+    // console.log("genre:", gendreData);
+    const showGenre = (genreIdList) => {
+        if (!genreData) return [];
+        const genreNameList = genreIdList.map((id) => {
+            const genreObj = genreData.find((genre) => genre.id === id);
+            return genreObj.name;
+        });
+
+        return genreNameList;
+    };
     return (
         <div
             style={{
@@ -17,9 +30,9 @@ const MovieCard = ({ movie, type, ranking }) => {
 
                 <div className="movie-info">
                     <div className="badge-wrap">
-                        {movie.genre_ids.map((id, index) => (
+                        {showGenre(movie.genre_ids).map((genre, index) => (
                             <Badge bg="warning" key={index}>
-                                {id}
+                                {genre}
                             </Badge>
                         ))}
                     </div>

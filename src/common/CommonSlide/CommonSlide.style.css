@@ -1,0 +1,22 @@
+.carousel-container {
+    overflow: hidden;
+    height: 368px;
+}
+
+.react-multi-carousel-dot-list {
+    bottom: -6px;
+}
+
+.react-multi-carousel-dot button {
+    border-width: 0;
+}
+
+.react-multi-carousel-dot--active button {
+    background-color: rgb(229, 9, 20);
+}
+
+@media (max-width: 464px) {
+    .react-multi-carousel-dot-list {
+        display: none;
+    }
+}

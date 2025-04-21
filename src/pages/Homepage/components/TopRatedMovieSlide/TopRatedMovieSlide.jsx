@@ -1,5 +1,7 @@
+import CommonSlide from "../../../../common/CommonSlide/CommonSlide";
+import { responsive } from "../../../../constants/responsive";
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
-import CommonSlide from "../CommonSlide/CommonSlide";
+
 const TopRatedMovieSlide = () => {
     const { data, isLoading, isError, error } =
         usePopularMoviesQuery("top_rated");
@@ -11,6 +13,7 @@ const TopRatedMovieSlide = () => {
             isError={isError}
             error={error}
             type="Top rated"
+            responsive={responsive}
         />
     );
 };
