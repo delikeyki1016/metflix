@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
-import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Alert, Col, Row, Spinner } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
+import "./MoviePage.style.css";
 
 // 무비페이지로 오는 경로 2가지
 // nav바에서 클릭해서 온 경우 ==> popularMovie 보여주기
@@ -40,43 +41,37 @@ const MoviePage = () => {
 
     return (
         <section>
-            <Container>
-                <Row>
-                    <Col lg={4} xs={12}>
-                        "filter area"
+            <Row>"filter area"</Row>
+            <Row>
+                {data?.results.map((movie, index) => (
+                    <Col key={index} lg={2} md={4} sm={6} xs={12}>
+                        <MovieCard movie={movie} />
                     </Col>
-                    <Col lg={8} xs={12}>
-                        <Row>
-                            {data?.results.map((movie, index) => (
-                                <Col key={index} lg={4} xs={12}>
-                                    <MovieCard movie={movie} />
-                                </Col>
-                            ))}
-                        </Row>
-                        <ReactPaginate
-                            nextLabel="next >"
-                            onPageChange={handlePageClick}
-                            pageRangeDisplayed={3}
-                            marginPagesDisplayed={2}
-                            pageCount={data?.total_pages} // 전체 페이지
-                            previousLabel="< previous"
-                            pageClassName="page-item"
-                            pageLinkClassName="page-link"
-                            previousClassName="page-item"
-                            previousLinkClassName="page-link"
-                            nextClassName="page-item"
-                            nextLinkClassName="page-link"
-                            breakLabel="..."
-                            breakClassName="page-item"
-                            breakLinkClassName="page-link"
-                            containerClassName="pagination"
-                            activeClassName="active"
-                            renderOnZeroPageCount={null}
-                            forcePage={page - 1} // 현재페이지
-                        />
-                    </Col>
-                </Row>
-            </Container>
+                ))}
+            </Row>
+            <Row className="custom-style-pagination">
+                <ReactPaginate
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={data?.total_pages} // 전체 페이지
+                    previousLabel="<"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                    forcePage={page - 1} // 현재페이지
+                />
+            </Row>
         </section>
     );
 };
