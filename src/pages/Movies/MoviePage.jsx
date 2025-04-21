@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
 import { Alert, Col, Row, Spinner } from "react-bootstrap";
@@ -18,15 +18,24 @@ const MoviePage = () => {
     const [query, setQuery] = useSearchParams();
     const [page, setPage] = useState(1);
     const keyword = query.get("q");
+    const prevKeyword = useRef(keyword); // 이전 키워드 저장
+
+    // 키워드가 바뀌면 페이지 1로 초기화
+    useEffect(() => {
+        if (prevKeyword.current !== keyword) {
+            setPage(1);
+            prevKeyword.current = keyword;
+        }
+    }, [keyword]);
 
     const { data, isLoading, isError, error } = useSearchMovieQuery({
         keyword,
         page,
     });
-    console.log("qq", data);
+    // console.log("qq", data);
 
     const handlePageClick = ({ selected }) => {
-        console.log("page:", selected);
+        // console.log("page:", selected);
         setPage(selected + 1);
     };
 
