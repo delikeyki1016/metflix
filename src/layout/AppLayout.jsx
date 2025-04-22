@@ -32,7 +32,14 @@ const AppLayout = () => {
                     top: 0,
                 }}
             >
-                <Container fluid style={{ maxWidth: 1600 }}>
+                <Container
+                    fluid
+                    style={{
+                        maxWidth: 1600,
+                        backgroundColor: "#000",
+                        paddingBottom: "10px",
+                    }}
+                >
                     <Navbar.Brand>
                         <img src="/logo.png" width="120" />
                     </Navbar.Brand>
