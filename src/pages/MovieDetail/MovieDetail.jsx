@@ -139,7 +139,7 @@ const MovieDetail = () => {
                     )}
                 </Col>
             </Row>
-            {movieReviews.length > 0 && (
+            {movieReviews?.length > 0 && (
                 <Row>
                     <Col lg={12}>
                         <h4 className="mt-5">review</h4>
