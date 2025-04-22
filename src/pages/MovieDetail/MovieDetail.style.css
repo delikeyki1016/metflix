@@ -1,0 +1,56 @@
+.movie-info {
+    max-width: 1200px;
+}
+
+.movie-poster img {
+    width: 100%;
+}
+
+.movie-info h1 {
+    width: 100%;
+}
+
+.badge-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 0;
+    justify-content: flex-start;
+}
+
+ul {
+    padding-left: 18px;
+    list-style: disc;
+}
+
+a {
+    color: #fff;
+}
+
+.modal-style {
+    --bs-body-bg: #333;
+    --bs-modal-color: #fff;
+    --bs-heading-color: #fff;
+    --bs-modal-header-border-color: #444;
+}
+
+.modal-style .btn-close {
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3e%3c/svg%3e");
+}
+
+.video-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.review-box {
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 12px;
+}
+
+.review-box p {
+    width: 100%;
+}

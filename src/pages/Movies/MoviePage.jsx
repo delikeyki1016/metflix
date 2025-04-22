@@ -16,6 +16,7 @@ import "./MoviePage.style.css";
 // page 값이 바뀔 때 useSearchMovie에 page까지 넣어서 fetch
 const MoviePage = () => {
     const [query, setQuery] = useSearchParams();
+    // console.log("쿼리1", query);
     const [page, setPage] = useState(1);
     const keyword = query.get("q");
     const prevKeyword = useRef(keyword); // 이전 키워드 저장
