@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./MoviePage.style.css";
+import noResultImg from "../../assets/no-result.png";
 
 // 무비페이지로 오는 경로 2가지
 // nav바에서 클릭해서 온 경우 ==> popularMovie 보여주기
@@ -23,13 +24,14 @@ const MoviePage = () => {
     const keyword = query.get("q");
     const prevKeyword = useRef(keyword);
     const [selectedGenre, setSelectedGenre] = useState("");
-
+    // 무비리스트 쿼리 호출
     const { data, isLoading, isError, error } = useSearchMovieQuery({
         keyword,
         page,
         genre: selectedGenre,
     });
-
+    console.log("dd", data);
+    // 장르 쿼리 호출
     const {
         data: genreList = [],
         isLoading: genreLoading,
@@ -41,7 +43,7 @@ const MoviePage = () => {
               movie.genre_ids.includes(Number(selectedGenre))
           )
         : data?.results || [];
-
+    console.log("filteredMovies", filteredMovies);
     // 키워드가 바뀌면 페이지 1로 초기화
     useEffect(() => {
         if (prevKeyword.current !== keyword) {
@@ -95,36 +97,50 @@ const MoviePage = () => {
             )}
 
             <Row className="mt-3">
-                {filteredMovies.map((movie, index) => (
-                    <Col key={index} lg={2} md={4} sm={6} xs={12}>
-                        <MovieCard movie={movie} />
+                {filteredMovies?.length > 0 ? (
+                    filteredMovies?.map((movie, index) => (
+                        <Col key={index} lg={2} md={4} sm={6} xs={12}>
+                            <MovieCard movie={movie} />
+                        </Col>
+                    ))
+                ) : (
+                    <Col className="no-result">
+                        <img src={noResultImg} alt="no result" />
+                        <div>
+                            There are no movies matching the{" "}
+                            <span>"{keyword}"</span> you searched for.
+                        </div>
+                        <div>{"Please search again."}</div>
                     </Col>
-                ))}
+                )}
             </Row>
-
-            <Row className="custom-style-pagination">
-                <ReactPaginate
-                    nextLabel=">"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
-                    pageCount={data?.total_pages || 0}
-                    previousLabel="<"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    breakLabel="..."
-                    breakClassName="page-item"
-                    breakLinkClassName="page-link"
-                    containerClassName="pagination"
-                    activeClassName="active"
-                    renderOnZeroPageCount={null}
-                    forcePage={page - 1}
-                />
-            </Row>
+            {filteredMovies?.length > 0 && (
+                <Row className="custom-style-pagination">
+                    <ReactPaginate
+                        nextLabel=">"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        pageCount={
+                            data?.total_pages > 101 ? 100 : data?.total_pages
+                        } // 전체 페이지
+                        previousLabel="<"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                        breakLabel="..."
+                        breakClassName="page-item"
+                        breakLinkClassName="page-link"
+                        containerClassName="pagination"
+                        activeClassName="active"
+                        renderOnZeroPageCount={null}
+                        forcePage={page - 1} // 현재 페이지
+                    />
+                </Row>
+            )}
         </section>
     );
 };
