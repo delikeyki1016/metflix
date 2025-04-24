@@ -48,3 +48,8 @@
     color: #dc3545;
     font-size: 18px;
 }
+
+.select-wrap {
+    display: flex;
+    gap: 10px;
+}

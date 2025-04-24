@@ -19,19 +19,7 @@ const AppLayout = () => {
     };
     return (
         <>
-            <Navbar
-                expand="lg"
-                className="bg-body-tertiary"
-                bg="dark"
-                data-bs-theme="dark"
-                style={{
-                    position: "fixed",
-                    width: "100%",
-                    zIndex: 9,
-                    height: 70,
-                    top: 0,
-                }}
-            >
+            <Navbar expand="lg" data-bs-theme="dark" className="nav-bar">
                 <Container
                     fluid
                     style={{

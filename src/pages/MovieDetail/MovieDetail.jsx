@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Badge, Button, Col, Row, Spinner } from "react-bootstrap";
 import { useMovieDetailQuery } from "../../hooks/useMovieDeail";
 import { useMovieGenreQuery } from "../../hooks/useMoiveGenre";
@@ -73,6 +73,33 @@ const MovieDetail = () => {
         setShowModal(true);
     };
 
+    const ReviewBox = ({ reviewText }) => {
+        const [showMoreText, setShowMoreText] = useState(false);
+        const limitText = 400;
+        const isLongText = reviewText.length > limitText;
+        // useEffect를 안쓰면 랜더링 도중에 상태값이 바뀌어서 계속 리랜더링 되어 too many re-render가 됨
+        useEffect(() => {
+            if (isLongText) {
+                setShowMoreText(true);
+            }
+        }, [isLongText]);
+        return (
+            <>
+                <p className={showMoreText ? "moreText" : ""}>{reviewText} </p>
+                {isLongText && (
+                    <Badge
+                        role="button"
+                        size="sm"
+                        bg="secondary"
+                        onClick={() => setShowMoreText(!showMoreText)}
+                    >
+                        {showMoreText ? "+ more" : "- less"}
+                    </Badge>
+                )}
+            </>
+        );
+    };
+
     return (
         <section className="movie-info">
             <Row>
@@ -120,7 +147,7 @@ const MovieDetail = () => {
                     <h4 className="mt-5">overview</h4>
                     <div>{data.overview}</div>
 
-                    {movieVideoList && (
+                    {movieVideoList?.length > 0 && (
                         <>
                             <h4 className="mt-5">video</h4>
                             <div className="video-list">
@@ -139,14 +166,19 @@ const MovieDetail = () => {
                     )}
                 </Col>
             </Row>
+            {/* 1. 글자수가 400개가 넘어가면 텍스트는 말줄임 되고 더보기 버튼이 표시, */}
+            {/* 2. 더보기 버튼을 클릭하면 다보기 */}
+            {/* 3. 접기 버튼을 클릭하면 다시 원래 상태로  */}
             {movieReviews?.length > 0 && (
                 <Row>
                     <Col lg={12}>
                         <h4 className="mt-5">review</h4>
                         {movieReviews.map((review, index) => (
                             <div key={index} className="review-box">
-                                <p>{review.content}</p>
-                                {review.author}
+                                <ReviewBox reviewText={review.content} />
+                                <div className="review-author">
+                                    - author : {review.author}
+                                </div>
                             </div>
                         ))}
                     </Col>

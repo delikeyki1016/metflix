@@ -19,16 +19,18 @@ import noResultImg from "../../assets/no-result.png";
 // page 값이 바뀔 때 useSearchMovie에 page까지 넣어서 fetch
 const MoviePage = () => {
     const [query, setQuery] = useSearchParams();
-    // console.log("쿼리1", query);
+    console.log("쿼리1", query);
     const [page, setPage] = useState(1);
     const keyword = query.get("q");
     const prevKeyword = useRef(keyword);
     const [selectedGenre, setSelectedGenre] = useState("");
+    const [popularity, setPopularity] = useState("");
     // 무비리스트 쿼리 호출
     const { data, isLoading, isError, error } = useSearchMovieQuery({
         keyword,
         page,
         genre: selectedGenre,
+        popularity,
     });
     console.log("dd", data);
     // 장르 쿼리 호출
@@ -38,19 +40,29 @@ const MoviePage = () => {
         isError: genreError,
     } = useMovieGenreQuery();
 
-    const filteredMovies = selectedGenre
-        ? data?.results.filter((movie) =>
-              movie.genre_ids.includes(Number(selectedGenre))
-          )
-        : data?.results || [];
-    console.log("filteredMovies", filteredMovies);
+    // const filteredMovies = selectedGenre
+    //     ? data?.results.filter((movie) =>
+    //           movie.genre_ids.includes(Number(selectedGenre))
+    //       )
+    //     : data?.results || [];
+
+    // console.log("filteredMovies", filteredMovies);
+
     // 키워드가 바뀌면 페이지 1로 초기화
     useEffect(() => {
         if (prevKeyword.current !== keyword) {
             setPage(1);
             prevKeyword.current = keyword;
         }
+        if (!keyword) {
+            console.log("진입");
+            setSelectedGenre("");
+            setPopularity("");
+        }
+        console.log("키워드", keyword);
     }, [keyword]);
+
+    // 첫 진입 시 기존 값 초기화
 
     const handlePageClick = ({ selected }) => {
         setPage(selected + 1);
@@ -58,6 +70,11 @@ const MoviePage = () => {
 
     const handleGenreChange = (e) => {
         setSelectedGenre(e.target.value);
+        setPage(1);
+    };
+
+    const handlePopularity = (e) => {
+        setPopularity(e.target.value);
         setPage(1);
     };
 
@@ -77,28 +94,41 @@ const MoviePage = () => {
 
     return (
         <section>
-            {!keyword && (
-                <Row>
-                    <Col lg={2}>
+            <Row>
+                <Col lg={3} className="select-wrap">
+                    <Form.Select
+                        aria-label="Select genre"
+                        value={selectedGenre}
+                        onChange={handleGenreChange}
+                    >
+                        <option value="">All Genres</option>
+                        {genreList.map((genre) => (
+                            <option key={genre.id} value={genre.id}>
+                                {genre.name}
+                            </option>
+                        ))}
+                    </Form.Select>
+                    {(keyword || selectedGenre) && (
                         <Form.Select
-                            aria-label="Select genre"
-                            value={selectedGenre}
-                            onChange={handleGenreChange}
+                            aria-label="Select popularity"
+                            value={popularity}
+                            onChange={handlePopularity}
                         >
-                            <option value="">All Genres</option>
-                            {genreList.map((genre) => (
-                                <option key={genre.id} value={genre.id}>
-                                    {genre.name}
-                                </option>
-                            ))}
+                            <option value="">popularity</option>
+                            <option key={1} value="desc">
+                                High popularity
+                            </option>
+                            <option key={2} value="asc">
+                                Low popularity
+                            </option>
                         </Form.Select>
-                    </Col>
-                </Row>
-            )}
+                    )}
+                </Col>
+            </Row>
 
             <Row className="mt-3">
-                {filteredMovies?.length > 0 ? (
-                    filteredMovies?.map((movie, index) => (
+                {data?.results.length > 0 ? (
+                    data?.results.map((movie, index) => (
                         <Col key={index} lg={2} md={4} sm={6} xs={12}>
                             <MovieCard movie={movie} />
                         </Col>
@@ -114,7 +144,7 @@ const MoviePage = () => {
                     </Col>
                 )}
             </Row>
-            {filteredMovies?.length > 0 && (
+            {data?.results.length > 0 && (
                 <Row className="custom-style-pagination">
                     <ReactPaginate
                         nextLabel=">"
