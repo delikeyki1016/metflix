@@ -53,13 +53,9 @@ const MoviePage = () => {
         if (prevKeyword.current !== keyword) {
             setPage(1);
             prevKeyword.current = keyword;
-        }
-        if (!keyword) {
-            console.log("진입");
             setSelectedGenre("");
             setPopularity("");
         }
-        console.log("키워드", keyword);
     }, [keyword]);
 
     // 첫 진입 시 기존 값 초기화
@@ -94,37 +90,39 @@ const MoviePage = () => {
 
     return (
         <section>
-            <Row>
-                <Col lg={3} className="select-wrap">
-                    <Form.Select
-                        aria-label="Select genre"
-                        value={selectedGenre}
-                        onChange={handleGenreChange}
-                    >
-                        <option value="">All Genres</option>
-                        {genreList.map((genre) => (
-                            <option key={genre.id} value={genre.id}>
-                                {genre.name}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    {(keyword || selectedGenre) && (
+            {!keyword && (
+                <Row>
+                    <Col lg={3} className="select-wrap">
                         <Form.Select
-                            aria-label="Select popularity"
-                            value={popularity}
-                            onChange={handlePopularity}
+                            aria-label="Select genre"
+                            value={selectedGenre}
+                            onChange={handleGenreChange}
                         >
-                            <option value="">popularity</option>
-                            <option key={1} value="desc">
-                                High popularity
-                            </option>
-                            <option key={2} value="asc">
-                                Low popularity
-                            </option>
+                            <option value="">All Genres</option>
+                            {genreList.map((genre) => (
+                                <option key={genre.id} value={genre.id}>
+                                    {genre.name}
+                                </option>
+                            ))}
                         </Form.Select>
-                    )}
-                </Col>
-            </Row>
+                        {(keyword || selectedGenre) && (
+                            <Form.Select
+                                aria-label="Select popularity"
+                                value={popularity}
+                                onChange={handlePopularity}
+                            >
+                                <option value="">popularity</option>
+                                <option key={1} value="desc">
+                                    High popularity
+                                </option>
+                                <option key={2} value="asc">
+                                    Low popularity
+                                </option>
+                            </Form.Select>
+                        )}
+                    </Col>
+                </Row>
+            )}
 
             <Row className="mt-3">
                 {data?.results.length > 0 ? (
