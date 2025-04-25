@@ -44,14 +44,9 @@ const MovieDetail = () => {
     }
 
     function showVideo() {
-        const onPlayerReady = (event) => {
-            // access to player in all event handlers via event.target
-            event.target.pauseVideo();
-        };
-
         const opts = {
             height: "510",
-            width: "760",
+            width: "100%",
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 1,
@@ -59,13 +54,7 @@ const MovieDetail = () => {
             },
         };
 
-        return (
-            <YouTube
-                videoId={selectedVideo}
-                opts={opts}
-                onReady={onPlayerReady}
-            />
-        );
+        return <YouTube videoId={selectedVideo} opts={opts} />;
     }
 
     const handleModal = (video) => {

@@ -6,6 +6,14 @@
     background-position: center;
     cursor: pointer;
     transition: 0.5s;
+    margin: 0 auto;
+}
+
+@media (max-width: 464px) {
+    .movie-card {
+        width: 220px;
+        height: 300px;
+    }
 }
 
 .overlay {
@@ -33,8 +41,14 @@
     z-index: 2;
 }
 
-.movie-info {
+.movie-info-card {
     font-size: 14px;
+}
+
+.movie-info-card ul {
+    margin-top: 5px;
+    padding-left: 0;
+    list-style: none;
 }
 
 .badge-wrap {

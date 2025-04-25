@@ -33,7 +33,7 @@ const MovieCard = ({ movie, type, ranking }) => {
             <div className="overlay">
                 <h4>{movie.title}</h4>
 
-                <div className="movie-info">
+                <div className="movie-info-card">
                     <div className="badge-wrap">
                         {showGenre(movie.genre_ids).map((genre, index) => (
                             <Badge bg="warning" key={index}>
@@ -42,10 +42,9 @@ const MovieCard = ({ movie, type, ranking }) => {
                         ))}
                     </div>
                     <ul>
-                        <li>average : {movie.vote_average}</li>
-                        <li>populariry : {movie.popularity}</li>
+                        <li>⭐ {movie.vote_average}</li>
+                        <li>❤️ {movie.popularity}</li>
                         <li>
-                            grade :{" "}
                             {movie.adult ? (
                                 <Badge bg="danger">Adult</Badge>
                             ) : (
