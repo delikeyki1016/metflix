@@ -42,8 +42,8 @@ const MovieCard = ({ movie, type, ranking }) => {
                         ))}
                     </div>
                     <ul>
-                        <li>⭐ {movie.vote_average}</li>
-                        <li>❤️ {movie.popularity}</li>
+                        <li>⭐ {movie.vote_average.toFixed(2)}</li>
+                        <li>❤️ {movie.popularity.toFixed(2)}</li>
                         <li>
                             {movie.adult ? (
                                 <Badge bg="danger">Adult</Badge>

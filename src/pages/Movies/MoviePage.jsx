@@ -40,14 +40,6 @@ const MoviePage = () => {
         isError: genreError,
     } = useMovieGenreQuery();
 
-    // const filteredMovies = selectedGenre
-    //     ? data?.results.filter((movie) =>
-    //           movie.genre_ids.includes(Number(selectedGenre))
-    //       )
-    //     : data?.results || [];
-
-    // console.log("filteredMovies", filteredMovies);
-
     // 키워드가 바뀌면 페이지 1로 초기화
     useEffect(() => {
         if (prevKeyword.current !== keyword) {
@@ -57,8 +49,6 @@ const MoviePage = () => {
             setPopularity("");
         }
     }, [keyword]);
-
-    // 첫 진입 시 기존 값 초기화
 
     const handlePageClick = ({ selected }) => {
         setPage(selected + 1);
@@ -90,39 +80,37 @@ const MoviePage = () => {
 
     return (
         <section>
-            {!keyword && (
-                <Row>
-                    <Col lg={3} className="select-wrap">
+            <Row>
+                <Col lg={3} className="select-wrap">
+                    <Form.Select
+                        aria-label="Select genre"
+                        value={selectedGenre}
+                        onChange={handleGenreChange}
+                    >
+                        <option value="">All Genres</option>
+                        {genreList.map((genre) => (
+                            <option key={genre.id} value={genre.id}>
+                                {genre.name}
+                            </option>
+                        ))}
+                    </Form.Select>
+                    {(keyword || selectedGenre) && (
                         <Form.Select
-                            aria-label="Select genre"
-                            value={selectedGenre}
-                            onChange={handleGenreChange}
+                            aria-label="Select popularity"
+                            value={popularity}
+                            onChange={handlePopularity}
                         >
-                            <option value="">All Genres</option>
-                            {genreList.map((genre) => (
-                                <option key={genre.id} value={genre.id}>
-                                    {genre.name}
-                                </option>
-                            ))}
+                            <option value="">popularity</option>
+                            <option key={1} value="desc">
+                                High popularity
+                            </option>
+                            <option key={2} value="asc">
+                                Low popularity
+                            </option>
                         </Form.Select>
-                        {(keyword || selectedGenre) && (
-                            <Form.Select
-                                aria-label="Select popularity"
-                                value={popularity}
-                                onChange={handlePopularity}
-                            >
-                                <option value="">popularity</option>
-                                <option key={1} value="desc">
-                                    High popularity
-                                </option>
-                                <option key={2} value="asc">
-                                    Low popularity
-                                </option>
-                            </Form.Select>
-                        )}
-                    </Col>
-                </Row>
-            )}
+                    )}
+                </Col>
+            </Row>
 
             <Row className="mt-3">
                 {data?.results.length > 0 ? (
